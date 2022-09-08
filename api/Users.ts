@@ -1,5 +1,6 @@
 import { UserCredentials, UserDto } from "../types";
 import { client } from "./index";
+import { Transaction } from "./Storekeeper";
 
 interface NewPasswordRequest {
   email: string;
@@ -67,3 +68,16 @@ export const deleteUser = async (request: DeleteUserRequest) =>
 
 export const editUser = async (request: EditUserRequest) =>
   client.put(`users/${request.userId}`, request);
+
+export const replenish = async (
+  organizationId: string,
+  distributionPointId: string,
+  data: Transaction[]
+) => {
+  console.log(client);
+
+  client.post(
+    `organizations/${organizationId}/distributionPoints/${distributionPointId}/replenishments`,
+    data
+  );
+};
