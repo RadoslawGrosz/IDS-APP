@@ -175,19 +175,17 @@
 //   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 // }
 
-import "react-native-gesture-handler";
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import {
-  createStackNavigator,
-  StackHeaderProps,
-} from "@react-navigation/stack";
-import DetailsScreen from "../screens/DetailsScreen";
-import HomeScreen from "../screens/HomeScreen";
-import { Appbar, Menu } from "react-native-paper";
-import { useAuth } from "../hooks/useAuth";
-import { useTranslation } from "../App";
-import LoginView from "../pages/Login/LoginPage";
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack';
+import DetailsScreen from '../screens/DetailsScreen';
+import HomeScreen from '../screens/HomeScreen';
+import { Appbar, Menu } from 'react-native-paper';
+import { useAuth } from '../hooks/useAuth';
+import { useTranslation } from '../App';
+import LoginView from '../pages/Login/LoginPage';
+import ReleaseScreen from '../screens/replenishment/ReleaseScreen';
 
 const Stack = createStackNavigator();
 
@@ -199,21 +197,21 @@ export default function Navigation() {
     <NavigationContainer>
       {isAuthenticated ? (
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName='Home'
           screenOptions={{
-            header: (props) => <CustomNavigationBar {...props} />,
+            header: props => <CustomNavigationBar {...props} />
           }}
         >
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name='Home' component={HomeScreen} />
+          <Stack.Screen name='Release' component={ReleaseScreen} />
         </Stack.Navigator>
       ) : (
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen
-            name="Login"
+            name='Login'
             component={LoginView}
             options={{
-              title: i18n.t("signIn"),
+              title: i18n.t('signIn')
             }}
           />
         </Stack.Navigator>
@@ -231,16 +229,10 @@ function CustomNavigationBar({ navigation, back }: StackHeaderProps) {
   return (
     <Appbar.Header>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title="Bogmar" />
+      <Appbar.Content title='Bogmar' />
       {!back ? (
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={
-            <Appbar.Action icon="menu" color="black" onPress={openMenu} />
-          }
-        >
-          <Menu.Item onPress={logout} title="Logout" />
+        <Menu visible={visible} onDismiss={closeMenu} anchor={<Appbar.Action icon='menu' color='black' onPress={openMenu} />}>
+          <Menu.Item onPress={logout} title='Logout' />
         </Menu>
       ) : null}
     </Appbar.Header>

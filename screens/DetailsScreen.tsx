@@ -12,7 +12,6 @@ import {
   ProductOnDistributionPoint,
   DistributionPointsQueryKey,
 } from "../types";
-import NumericInput from "react-native-numeric-input";
 import { useCustomMutation } from "../hooks/useCustomMutation";
 import { Transaction } from "../api/Storekeeper";
 import { replenish } from "../api/Users";
